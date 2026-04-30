@@ -1,0 +1,50 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Large AnnData and matrix artifacts
+*.h5ad
+*.h5
+*.hdf5
+*.loom
+*.zarr/
+*.npz
+*.npy
+
+# Model checkpoints and training outputs
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+lightning_logs/
+scvi_log/
+wandb/
+mlruns/
+checkpoints/
+GBM_CPA_model/
+GBM_CPA_model.previous/
+
+# Logs, temporary metrics, and crash dumps
+*.log
+*.tmp
+*.tmp.md
+core
+core.*
+
+# Project-generated large local data directories/files
+GBM_dataset/
+GBM_old/
+GBM_Universal_Perturbation_Ready.h5ad
+GBM_CPA_PW034_Panobinostat_pred.h5ad
+GBM_MeanShiftBaseline_PW034_Panobinostat_pred.h5ad
+
+# Keep the CPA output directory lightweight in git.
+# The report/manifest/artifact notes remain tracked; local artifact links stay ignored.
+CPA_PW034_Panobinostat_outputs/*.h5ad
+CPA_PW034_Panobinostat_outputs/*.log
+CPA_PW034_Panobinostat_outputs/history.csv
+CPA_PW034_Panobinostat_outputs/epoch_history.tsv
+CPA_PW034_Panobinostat_outputs/GBM_CPA_model
+CPA_PW034_Panobinostat_outputs/GBM_CRISP_OOD_metrics.md
