@@ -1,0 +1,10 @@
+{
+  "method": "MLP (M5)",
+  "patient": "PW034",
+  "drug": "Panobinostat",
+  "pearson": -0.06914223730564117,
+  "spearman": -0.08581032412965187,
+  "r2": -1017.3223876953125,
+  "sinkhorn": 0.013198591768741608,
+  "direction": 20.0
+}

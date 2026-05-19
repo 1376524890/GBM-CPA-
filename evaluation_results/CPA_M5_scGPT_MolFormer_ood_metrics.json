@@ -1,0 +1,39 @@
+{
+  "method": "CPA_M5_scGPT_MolFormer",
+  "setting": "ood",
+  "macro_avg": {
+    "r2score": 0.7477472424507141,
+    "r2score_de": 0.0,
+    "pearson": 0.9197215437889099,
+    "pearson_de": 0.0,
+    "mse": 0.009067604318261147,
+    "mse_de": 9.905772458296269e-05,
+    "pearson_delta": 0.0,
+    "pearson_delta_de": 0.0976548045873642,
+    "sinkhorn_de": 0.006618523970246315,
+    "n_valid_groups": 1,
+    "skipped": {
+      "treated_too_few": 0,
+      "dmso_control": 0,
+      "deg_missing": 0,
+      "deg_too_few": 0,
+      "ctrl_too_few": 0
+    }
+  },
+  "per_group": {
+    "PW034_Panobinostat": {
+      "r2score": 0.7477472424507141,
+      "r2score_de": 0.0,
+      "pearson": 0.9197215437889099,
+      "pearson_de": 0,
+      "mse": 0.009067604318261147,
+      "mse_de": 9.905772458296269e-05,
+      "pearson_delta": 0,
+      "pearson_delta_de": 0.0976548045873642,
+      "sinkhorn_de": 0.006618523970246315,
+      "n_treated": 2679,
+      "n_ctrl": 15288,
+      "n_pred": 15288
+    }
+  }
+}
