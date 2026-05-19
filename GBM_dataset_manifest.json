@@ -1,0 +1,153 @@
+{
+  "dataset_name": "GBM_NIPS_Ready",
+  "created_at": "2026-05-19",
+  "base_path": "/home/u2023312303/nature子刊/裴立昆实验",
+  "final_h5ad_path": "GBM_NIPS_Ready.h5ad",
+  "n_cells": 169972,
+  "n_genes": 5000,
+  "n_patients": 21,
+  "n_drugs": 7,
+  "embedding_shapes": {
+    "X_scGPT": [169972, 512],
+    "X_scGPT_ctrl": [169972, 512],
+    "X_scGPT_pert": [169972, 512],
+    "X_MolFormer": [169972, 768]
+  },
+  "obs_keys": [
+    "gsm_accession", "sample_title", "barcode_original", "perturbation",
+    "dosage", "covariate_patient", "source_treatment", "n_counts",
+    "dataset", "cell_type", "is_control", "source_file", "split",
+    "foundation_model_query_eligible", "SMILES", "condition",
+    "canonical_smiles", "cov_drug_name", "neg_control", "is_treated"
+  ],
+  "obsm_keys": ["X_MolFormer", "X_scGPT", "X_scGPT_ctrl", "X_scGPT_pert"],
+  "uns_keys": [
+    "count_layer_note", "drug_embeddings", "drug_smiles",
+    "foundation_model_query", "hvg", "log1p", "ood_split", "top50_DEGs"
+  ],
+  "layers_keys": ["counts"],
+  "split_counts": {
+    "train": 150564,
+    "valid": 16729,
+    "ood": 2679
+  },
+  "split_pct": {
+    "train": 88.6,
+    "valid": 9.8,
+    "ood": 1.6
+  },
+  "condition_counts": {
+    "control": 91001,
+    "Etoposide": 36513,
+    "Panobinostat": 22220,
+    "Ana-12": 7085,
+    "RO4929097": 4806,
+    "Tazemetostat": 4128,
+    "Ispenisib": 2683,
+    "Temozolomide": 1536
+  },
+  "patient_counts": {
+    "PW030": 50909, "PW034": 33861, "PW036": 22505,
+    "PW032": 20751, "PW040": 16269, "PW029": 6150,
+    "PW053707": 2340, "PW051704": 1881, "PW053710": 1718,
+    "PW053711": 1378, "GS785": 1344, "PW052703": 1293,
+    "PW052709": 1289, "PW052705": 1288, "PW031": 1176,
+    "PW051702": 1158, "GS359": 1152, "GS789": 1152,
+    "PW052706": 1013, "PW051708": 769, "GS772": 576
+  },
+  "control_treated_counts": {
+    "control": 91001,
+    "treated": 78971
+  },
+  "deg_key": "top50_DEGs",
+  "deg_group_count": 18,
+  "deg_key_separator": "|",
+  "cov_drug_name_separator": "_",
+  "rank_genes_groups_cov_available": false,
+  "drug_smiles": {
+    "Ana-12": "Cc1ccc(-c2nc3ccccc3n2-c2ccccc2)cc1",
+    "Etoposide": "COc1cc2c(cc1O)C1C(=O)OCC1c1cc3c(cc1O2)OCO3",
+    "Ispenisib": "CC(C)N1CCN(c2ccnc(N3CCOCC3)n2)CC1",
+    "Panobinostat": "C=Cc1ccc(-c2cnn(CCN3CCC(C(=O)NO)CC3)c2)cc1",
+    "RO4929097": "CC(C)(C)OC(=O)N1CCC(n2cnc3ccc(C(F)(F)F)cc32)CC1",
+    "Tazemetostat": "CC(C)N1CCN(c2ccnc(N3CCOCC3)n2)CC1",
+    "Temozolomide": "CN1N=Nc2ncn(n2)C1=O"
+  },
+  "molformer_parquet_shape": [6, 768],
+  "ispinisib_tazemetostat_same_smiles": true,
+  "valid_groups": 18,
+  "ood_valid_groups": 1,
+  "ood_target": "PW034_Panobinostat",
+  "ood_type": "unseen_patient_combination",
+  "file_manifest": {
+    "primary_h5ad": {"path": "GBM_NIPS_Ready.h5ad", "size_mb": 871.0, "purpose": "Final standardized dataset with all metadata and embeddings"},
+    "embeddings_h5ad": {"path": "GBM_scGPT_embeddings.h5ad", "size_mb": 760.5, "purpose": "Raw scGPT cell embeddings before alignment"},
+    "with_embeddings_h5ad": {"path": "GBM_with_embeddings.h5ad", "size_mb": 871.0, "purpose": "Intermediate dataset with embeddings added"},
+    "universal_h5ad": {"path": "GBM_Universal_Perturbation_Ready.h5ad", "size_mb": 223.6, "purpose": "Pre-normalization counts matrix"},
+    "molformer_npy": {"path": "GBM_X_MolFormer.npy", "size_mb": 522.2, "purpose": "Cell-level MolFormer embeddings matrix"},
+    "molformer_parquet": {"path": "GBM_molformer_drug_emb.parquet", "size_mb": 0.4, "purpose": "Drug-level MolFormer embeddings"},
+    "molformer_meta": {"path": "GBM_molformer_drug_emb.metadata.json", "size_mb": 0.001, "purpose": "SMILES-to-drug mapping metadata"},
+    "aligner": {"path": "GBM_scGPT_aligner.pt", "size_mb": 126.1, "purpose": "scGPT aligner MLP weights (all cells)"},
+    "aligner_ctrl": {"path": "GBM_scGPT_aligner_ctrl.pt", "size_mb": 126.1, "purpose": "scGPT aligner MLP weights (control only)"},
+    "aligner_pert": {"path": "GBM_scGPT_aligner_pert.pt", "size_mb": 126.1, "purpose": "scGPT aligner MLP weights (perturbed only)"},
+    "aligned_XscGPT": {"path": "GBM_scGPT_aligned_XscGPT.npy", "size_mb": 3399.4, "purpose": "Aligned scGPT to gene space (all cells)"},
+    "aligned_XscGPT_ctrl": {"path": "GBM_scGPT_aligned_XscGPT_ctrl.npy", "size_mb": 3399.4, "purpose": "Aligned scGPT to gene space (control only)"},
+    "aligned_XscGPT_pert": {"path": "GBM_scGPT_aligned_XscGPT_pert.npy", "size_mb": 3399.4, "purpose": "Aligned scGPT to gene space (perturbed only)"},
+    "cpa_model": {"path": "GBM_CPA_model/", "purpose": "CPA M0 baseline trained model"},
+    "cpa_molformer_model": {"path": "GBM_CPA_MolFormer_model/", "purpose": "CPA M4 +MolFormer model"},
+    "cpa_scgpt_model": {"path": "GBM_CPA_scGPT_model/", "purpose": "CPA M1 +scGPT all model"},
+    "cpa_scgpt_ctrl_model": {"path": "GBM_CPA_scGPT_ctrl_model/", "purpose": "CPA M2 +scGPT ctrl model"},
+    "cpa_scgpt_pert_model": {"path": "GBM_CPA_scGPT_pert_model/", "purpose": "CPA M3 +scGPT pert model"},
+    "cpa_scgpt_molformer_model": {"path": "GBM_CPA_scGPT_MolFormer_model/", "purpose": "CPA M5 +scGPT+MolFormer model"},
+    "predictions": {
+      "CPA_M0": "GBM_CPA_PW034_Panobinostat_pred.h5ad",
+      "CPA_M4_MolFormer": "GBM_CPA_MolFormer_PW034_Panobinostat_pred.h5ad",
+      "CPA_M1_scGPT": "GBM_CPA_scGPT_PW034_Panobinostat_pred.h5ad",
+      "CPA_M2_scGPT_ctrl": "GBM_CPA_scGPT_ctrl_PW034_Panobinostat_pred.h5ad",
+      "CPA_M3_scGPT_pert": "GBM_CPA_scGPT_pert_PW034_Panobinostat_pred.h5ad",
+      "CPA_M5_scGPT_MolFormer": "GBM_CPA_scGPT_MolFormer_PW034_Panobinostat_pred.h5ad",
+      "MeanShiftBaseline": "GBM_MeanShiftBaseline_PW034_Panobinostat_pred.h5ad",
+      "MLP_M1": "mlp_comparison_results/MLP_M1_PW034_Panobinostat_pred.h5ad",
+      "MLP_M5": "mlp_comparison_results/MLP_M5_PW034_Panobinostat_pred.h5ad"
+    },
+    "evaluation_results": {
+      "CPA_M0": "evaluation_results/CPA_M0_ood_metrics.json",
+      "CPA_M4_MolFormer": "evaluation_results/CPA_M4_MolFormer_ood_metrics.json",
+      "CPA_M1_scGPT": "evaluation_results/CPA_M1_scGPT_ood_metrics.json",
+      "CPA_M2_scGPT_ctrl": "evaluation_results/CPA_M2_scGPT_ctrl_ood_metrics.json",
+      "CPA_M3_scGPT_pert": "evaluation_results/CPA_M3_scGPT_pert_ood_metrics.json",
+      "CPA_M5_scGPT_MolFormer": "evaluation_results/CPA_M5_scGPT_MolFormer_ood_metrics.json",
+      "MeanShiftBaseline": "evaluation_results/MeanShiftBaseline_ood_metrics.json",
+      "MLP_M1": "evaluation_results/MLP_M1_ood_metrics.json",
+      "MLP_M5": "evaluation_results/MLP_M5_ood_metrics.json",
+      "CRISP_OOD": "GBM_CRISP_OOD_metrics.md"
+    },
+    "scripts": {
+      "prepare_gbm_universal": "scripts/prepare_gbm_universal.py",
+      "encode_cells_scgpt": "scripts/encode_gbm_cells_scgpt.py",
+      "encode_drugs_molformer": "scripts/encode_gbm_drugs_molformer.py",
+      "prepare_with_embeddings": "scripts/prepare_gbm_with_embeddings.py",
+      "fix_nips_format": "scripts/fix_gbm_nips_format.py",
+      "train_scgpt_aligner": "scripts/train_scgpt_aligner.py",
+      "train_cpa_ood": "scripts/train_cpa_ood.py",
+      "train_cpa_molformer": "scripts/train_cpa_molformer.py",
+      "train_cpa_scgpt": "scripts/train_cpa_scgpt.py",
+      "train_cpa_scgpt_molformer": "scripts/train_cpa_scgpt_molformer.py",
+      "evaluate_crisp_ood": "scripts/evaluate_crisp_ood.py",
+      "evaluate_nips_gbm": "scripts/evaluate_nips_gbm.py"
+    }
+  },
+  "qc_status": "PASS_WITH_WARNINGS",
+  "warnings": [
+    "DEG keys use '|' separator while cov_drug_name uses '_' - need conversion mapping",
+    "rank_genes_groups_cov not available; use top50_DEGs with key conversion",
+    "XscGPT/XMolFormer aliases missing in obsm; compatible code should use X_scGPT/X_MolFormer",
+    "cell_type field contains patient IDs, not real cell types",
+    "Ispenisib and Tazemetostat share identical canonical SMILES and MolFormer embeddings",
+    "8 treated groups have no DEG entries and no matched control groups",
+    "CPA predictions are on control cells (counterfactual), not on treated cells",
+    "MolFormer parquet uses SMILES strings as index, not drug names",
+    "M0/M4 predictions in raw counts space; M1/M2/M3/M5 in approx log1p space"
+  ],
+  "errors": []
+}
