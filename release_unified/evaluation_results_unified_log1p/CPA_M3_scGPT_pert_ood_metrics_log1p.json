@@ -1,0 +1,37 @@
+{
+  "method": "CPA_M3_scGPT_pert",
+  "legacy_space": "log1p",
+  "eval_space": "log1p",
+  "macro_avg": {
+    "pearson": 0.8942565355029526,
+    "mse": 0.01021751876357176,
+    "r2score": 0.715757590348062,
+    "pearson_delta": 0.4408793115430349,
+    "pearson_de": -0.14294645734989536,
+    "mse_de": 0.00018126609930367213,
+    "r2score_de": -929.8338543359374,
+    "pearson_delta_de": 0.027006917710548833,
+    "sinkhorn_de": 0.5010174512863159,
+    "direction_accuracy_de": 0.46,
+    "n_treated": 2679,
+    "n_ctrl": 15288,
+    "n_pred": 15288
+  },
+  "per_group": {
+    "PW034_Panobinostat": {
+      "pearson": 0.8942565355029526,
+      "mse": 0.01021751876357176,
+      "r2score": 0.715757590348062,
+      "pearson_delta": 0.4408793115430349,
+      "pearson_de": -0.14294645734989536,
+      "mse_de": 0.00018126609930367213,
+      "r2score_de": -929.8338543359374,
+      "pearson_delta_de": 0.027006917710548833,
+      "sinkhorn_de": 0.5010174512863159,
+      "direction_accuracy_de": 0.46,
+      "n_treated": 2679,
+      "n_ctrl": 15288,
+      "n_pred": 15288
+    }
+  }
+}

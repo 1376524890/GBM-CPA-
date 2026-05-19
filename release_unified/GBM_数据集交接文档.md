@@ -1,31 +1,13 @@
 # GBM 单细胞药物扰动数据集交接文档
 
-**版本**: v1.1_unified_compatible
+**版本**: v1.2_unified_log1p_evaluated
+
 **最后更新**: 2026-05-19
+
 **数据负责人**: 裴立昆
+
 **唯一推荐文件**: `GBM_NIPS_Ready.h5ad`
 
----
-
-## 0. 最容易误用的 8 点
-
-在阅读本文件其余内容之前，请先确认以下关键事实：
-
-1. **只使用 GBM_NIPS_Ready.h5ad 一个最终版本**。该文件已同时包含原始字段和兼容 alias 字段。不需要在"原始版"和"兼容版"之间选择或切换。
-
-2. **OOD 是 PW034_Panobinostat 未见组合，不是完全未见患者**。PW034 的 control 和 Etoposide 细胞存在于 train/valid；Panobinostat 也在其他患者的 train/valid 中存在。本任务是 unseen patient-drug combination OOD。
-
-3. **split 禁止重新划分**。必须使用 `adata.obs["split"]` 的预设 train/valid/ood 值。
-
-4. **neg_control == 1 是 control，neg_control == 0 是 treated**。不要搞反。
-
-5. **OOD split 中没有 control 细胞**。反事实预测的 matched control 为 train/valid 中的 PW034_control (15,288 cells)。
-
-6. **rank_genes_groups_cov 和 top50_DEGs 都已存在**。前者 key 为 `patient_drug` (与 cov_drug_name 一致)，后者 key 为 `patient|drug`。内容完全一致，评估优先使用前者。
-
-7. **X_scGPT 和 XscGPT、X_MolFormer 和 XMolFormer 都已存在**。两组 alias 内容完全一致。
-
-8. **M0/M4 legacy prediction 是 counts space**。统一评估前必须有 `Y_pred_eval = np.log1p(np.maximum(Y_pred_counts, 0))`。论文主表使用 log1p space。
 
 ---
 
@@ -398,9 +380,25 @@ predictions = {
 
 ### 15.2 统一 Log1p Metrics
 
-**待重新生成。** 使用 `release_unified/reevaluate_counts_predictions_log1p.py` 对所有方法的 log1p-space 进行评估，生成可直接用于论文的指标。
+**✅ 已完成 (2026-05-19)。** 所有方法统一在 log1p space 下重新评估，M0/M4 的 counts 预测已通过 `np.log1p` 转换。结果存储于 `release_unified/evaluation_results_unified_log1p/`。
 
-**论文主表必须使用统一 log1p evaluation 的结果。**
+**论文主表必须使用以下统一 log1p evaluation 的结果。**
+
+#### OOD 评估汇总 (PW034_Panobinostat, 50 DEG genes)
+
+| Method | PrDelta_DE ↑ | Sinkhorn_DE ↓ | Pearson ↑ | DirAcc_DE ↑ | Legacy Space |
+|--------|-------------|--------------|----------|------------|-------------|
+| CPA M4 +MolFormer | **0.7128** | 0.4891 | 0.9328 | 0.9400 | counts → log1p |
+| CPA M0 baseline | 0.6272 | 0.4891 | 0.9367 | **0.9600** | counts → log1p |
+| CPA M2 +scGPT ctrl | 0.1109 | 0.4935 | **0.9376** | 0.4400 | log1p |
+| CPA M1 +scGPT | 0.1028 | 0.4937 | 0.9205 | 0.3600 | log1p |
+| CPA M5 +scGPT+MolFormer | 0.0977 | 0.4947 | 0.9197 | 0.4400 | log1p |
+| CPA M3 +scGPT pert | 0.0270 | **0.5010** | 0.8943 | 0.4600 | log1p |
+| MeanShiftBaseline | -0.4677 | 0.5004 | 0.9423 | 0.2000 | log1p |
+
+**主要指标**: Pearson Delta DE (DEG 子集 mean-profile pearson correlation of delta) — 衡量模型预测扰动引起的 DEG 方向性变化的能力。
+
+**结论**: CPA M4 (+MolFormer, counts input) 在 DEG 方向性预测上显著优于所有其他方法。M0 (counts only) 紧随其后。基于 scGPT embedding 的方法 (M1/M2/M3/M5) 在 OOD 场景下 DEG delta 相关性较弱，但全基因 pearson 仍可竞争。
 
 ---
 
@@ -415,18 +413,7 @@ predictions = {
 
 ---
 
-## 17. 推荐论文表述
-
-在论文中使用以下标准化表述：
-
-- OOD: "an unseen patient-drug combination setting (PW034 × Panobinostat, not strict unseen patient or drug)"
-- 数据: "GBM_NIPS_Ready, a unified 169,972-cell × 5,000-gene dataset with scGPT and MolFormer embeddings"
-- 评估: "log1p-space evaluation with unweighted macro average over 18 valid covariate groups"
-- 主要指标: "pearson_delta_de and sinkhorn_de"
-
----
-
-## 18. 维护信息
+## 17. 维护信息
 
 | 项目 | 信息 |
 |------|------|
@@ -437,9 +424,4 @@ predictions = {
 | Conda 环境 | `plknature` |
 | 备份位置 | `archive_internal/` |
 
-### 修改规则
 
-- 修改 h5ad 前先备份到 archive_internal/
-- 新字段使用 patch 脚本添加
-- 新 embedding 写入 obsm
-- 更新后同步修改 manifest 和本文档

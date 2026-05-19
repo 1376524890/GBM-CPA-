@@ -15,6 +15,7 @@ import json
 import numpy as np
 import anndata as ad
 import scipy.sparse as sp
+import torch
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -89,7 +90,8 @@ def compute_metrics(Y_true, Y_pred, Y_ctrl, deg_genes, var_names):
             Y_pred_de = Y_pred_de / (np.linalg.norm(Y_pred_de, axis=1, keepdims=True) + 1e-8)
             sinkhorn = geomloss.SamplesLoss(loss="sinkhorn", p=2, blur=0.05)
             results["sinkhorn_de"] = float(sinkhorn(
-                Y_true_de.astype(np.float32), Y_pred_de.astype(np.float32)).item())
+                torch.from_numpy(Y_true_de.astype(np.float32)),
+                torch.from_numpy(Y_pred_de.astype(np.float32))).item())
         else:
             results["sinkhorn_de"] = float("nan")
     except ImportError:
