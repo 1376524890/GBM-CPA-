@@ -59,7 +59,6 @@
 | DEG 字典 | `uns["top50_DEGs"]` | `uns["rank_genes_groups_cov"]` | key 分隔符不同，内容一致 |
 | 版本元数据 | - | `uns["release_metadata"]` | 数据集版本信息 |
 
-**不需要**在"原始 h5ad"和"兼容 h5ad"之间选择。所有方法统一加载 GBM_NIPS_Ready.h5ad。
 
 ---
 
@@ -204,7 +203,7 @@ OOD split 中没有 control。PW034_Panobinostat 的 matched control 来自 trai
 | CPA M5 +scGPT+MolFormer | ~log1p | 直接使用 |
 | MeanShiftBaseline | ~log1p | 直接使用 |
 
-**R2/MSE 对表达空间敏感**，不能把 counts-space 结果和 log1p-space 结果直接比较。论文主表建议使用统一 log1p evaluation。历史 legacy metrics 可保留但必须标注为 legacy/original pipeline metrics。
+**R2/MSE 对表达空间敏感**，不能把 counts-space 结果和 log1p-space 结果直接比较。
 
 用 `release_unified/reevaluate_counts_predictions_log1p.py` 可对 M0/M4 重新评估。
 
@@ -236,7 +235,7 @@ OOD split 中没有 control。PW034_Panobinostat 的 matched control 来自 trai
 
 ### 8.3 ⚠️ Ispenisib/Tazemetostat 共享 SMILES
 
-两种药物 canonical SMILES 完全相同，MolFormer embedding 完全相同。基于 MolFormer 的方法无法区分它们。论文中应作为 known limitation 标注。
+两种药物 canonical SMILES 完全相同，MolFormer embedding 完全相同。基于 MolFormer 的方法无法区分它们。
 
 ---
 
@@ -301,7 +300,6 @@ deg_genes = adata.uns["rank_genes_groups_cov"][group_name]
 | M4 +MolFormer | layers["counts"] | X_MolFormer | h5ad | ✅ |
 | M5 +scGPT+MolFormer | X_scGPT → aligner | X_MolFormer | h5ad + aligner.pt | ✅ |
 
-**所有方法均使用同一个 GBM_NIPS_Ready.h5ad。** 不需要为不同方法准备不同的 h5ad 版本。
 
 ---
 
@@ -380,7 +378,7 @@ predictions = {
 
 ### 15.2 统一 Log1p Metrics
 
-**✅ 已完成 (2026-05-19)。** 所有方法统一在 log1p space 下重新评估，M0/M4 的 counts 预测已通过 `np.log1p` 转换。结果存储于 `release_unified/evaluation_results_unified_log1p/`。
+所有方法统一在 log1p space 下重新评估，M0/M4 的 counts 预测已通过 `np.log1p` 转换。结果存储于 `release_unified/evaluation_results_unified_log1p/`。
 
 **论文主表必须使用以下统一 log1p evaluation 的结果。**
 
