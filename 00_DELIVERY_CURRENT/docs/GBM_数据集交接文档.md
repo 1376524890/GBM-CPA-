@@ -6,7 +6,7 @@
 
 **数据负责人**: 裴立昆
 
-**唯一推荐文件**: `00_DELIVERY_CURRENT/dataset/GBM_NIPS_Ready.h5ad`
+**唯一数据文件**: `00_DELIVERY_CURRENT/dataset/GBM_NIPS_Ready.h5ad`
 
 
 ---
