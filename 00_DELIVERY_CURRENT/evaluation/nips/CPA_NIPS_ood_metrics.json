@@ -1,0 +1,39 @@
+{
+  "method": "CPA_NIPS",
+  "setting": "ood",
+  "macro_avg": {
+    "r2score": 0.0,
+    "r2score_de": 0.0,
+    "pearson": 0.8852397799491882,
+    "pearson_de": 0.0,
+    "mse": 0.08563356846570969,
+    "mse_de": 1.521888862043852e-05,
+    "pearson_delta": 0.0,
+    "pearson_delta_de": 0.36109140515327454,
+    "sinkhorn_de": 0.0046404567547142506,
+    "n_valid_groups": 1,
+    "skipped": {
+      "treated_too_few": 0,
+      "dmso_control": 0,
+      "deg_missing": 0,
+      "deg_too_few": 0,
+      "ctrl_too_few": 0
+    }
+  },
+  "per_group": {
+    "PW034_Panobinostat": {
+      "r2score": 0.0,
+      "r2score_de": 0.0,
+      "pearson": 0.8852397799491882,
+      "pearson_de": 0,
+      "mse": 0.08563356846570969,
+      "mse_de": 1.521888862043852e-05,
+      "pearson_delta": 0,
+      "pearson_delta_de": 0.36109140515327454,
+      "sinkhorn_de": 0.0046404567547142506,
+      "n_treated": 2679,
+      "n_ctrl": 15288,
+      "n_pred": 15288
+    }
+  }
+}

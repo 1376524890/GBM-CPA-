@@ -1,0 +1,8 @@
+ M scripts/evaluate_nips_gbm.py
+ M scripts/train_cpa_molformer.py
+?? GBM_CPA_NIPS_model/
+?? evaluation_results/CPA_NIPS_ood_metrics.json
+?? management/
+?? scripts/nips_aliases.py
+?? scripts/patch_gbm_nips_original_aliases.py
+?? scripts/run_cpa_nips.py

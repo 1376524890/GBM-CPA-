@@ -39,6 +39,19 @@ GBM_old/
 GBM_Universal_Perturbation_Ready.h5ad
 GBM_CPA_PW034_Panobinostat_pred.h5ad
 GBM_MeanShiftBaseline_PW034_Panobinostat_pred.h5ad
+00_DELIVERY_CURRENT/dataset/*.h5ad
+00_DELIVERY_CURRENT/predictions/*.h5ad
+00_DELIVERY_CURRENT/logs/
+00_DELIVERY_CURRENT/models/*/model.pt
+01_REUSABLE_ASSETS/preprocessed_data/
+01_REUSABLE_ASSETS/embeddings/*.npy
+01_REUSABLE_ASSETS/embeddings/*.pt
+01_REUSABLE_ASSETS/source_geo/GBM_dataset/
+02_RUNTIME_RESULTS/crash_dumps/
+03_ARCHIVE_HISTORY/**/*.h5ad
+03_ARCHIVE_HISTORY/**/model.pt
+03_ARCHIVE_HISTORY/**/core
+03_ARCHIVE_HISTORY/**/core.*
 
 # Keep the CPA output directory lightweight in git.
 # The report/manifest/artifact notes remain tracked; local artifact links stay ignored.
