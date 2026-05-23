@@ -1,0 +1,39 @@
+{
+  "method": "CPA_GBM_M1",
+  "setting": "ood",
+  "macro_avg": {
+    "r2score": 0.7637444734573364,
+    "r2score_de": 0.0,
+    "pearson": 0.9225947856903076,
+    "pearson_de": 0.0,
+    "mse": 0.008492560125887394,
+    "mse_de": 8.07393153081648e-05,
+    "pearson_delta": 0.5196703672409058,
+    "pearson_delta_de": 0.026756353676319122,
+    "sinkhorn_de": 0.006189265754073858,
+    "n_valid_groups": 1,
+    "skipped": {
+      "treated_too_few": 0,
+      "dmso_control": 0,
+      "deg_missing": 0,
+      "deg_too_few": 0,
+      "ctrl_too_few": 0
+    }
+  },
+  "per_group": {
+    "PW034_Panobinostat": {
+      "r2score": 0.7637444734573364,
+      "r2score_de": 0.0,
+      "pearson": 0.9225947856903076,
+      "pearson_de": 0,
+      "mse": 0.008492560125887394,
+      "mse_de": 8.07393153081648e-05,
+      "pearson_delta": 0.5196703672409058,
+      "pearson_delta_de": 0.026756353676319122,
+      "sinkhorn_de": 0.006189265754073858,
+      "n_treated": 2679,
+      "n_ctrl": 15288,
+      "n_pred": 15288
+    }
+  }
+}

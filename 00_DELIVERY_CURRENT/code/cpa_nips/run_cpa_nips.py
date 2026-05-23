@@ -28,6 +28,7 @@ import anndata as ad
 import numpy as np
 import pandas as pd
 import torch
+from lightning.pytorch.loggers import TensorBoardLogger
 from scipy import sparse, stats
 from sklearn.metrics import r2_score
 
@@ -326,12 +327,16 @@ def train_cpa(CPA: type, adata: ad.AnnData, args: argparse.Namespace):
         args.model_dir.rename(backup)
         emit("model_dir_backed_up", backup=str(backup))
 
+    tb_log_dir = args.model_dir / "tensorboard_logs"
+    tb_logger = TensorBoardLogger(save_dir=str(tb_log_dir), name="cpa_training")
+
     emit(
         "train_start",
         max_epochs=args.max_epochs,
         batch_size=args.batch_size,
         early_stopping_patience=args.early_stopping_patience,
         device=args.device,
+        tensorboard_log_dir=str(tb_logger.log_dir),
     )
     model.train(
         max_epochs=args.max_epochs,
@@ -347,6 +352,7 @@ def train_cpa(CPA: type, adata: ad.AnnData, args: argparse.Namespace):
         },
         log_every_n_steps=25,
         enable_progress_bar=True,
+        logger=tb_logger,
     )
 
     history = model.epoch_history.copy()

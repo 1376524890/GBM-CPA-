@@ -1,0 +1,46 @@
+{
+  "ood": {
+    "macro_avg": {
+      "r2score": 0.0,
+      "r2score_de": 0.11596821345292128,
+      "pearson": 0.469723641872406,
+      "pearson_de": 0.46645403109444,
+      "mse": 13.777816647058957,
+      "mse_de": 225.15232428091474,
+      "pearson_delta": 0.06285679963222318,
+      "pearson_delta_de": 0.7682864975256772,
+      "sinkhorn_de": 6808.649828981318,
+      "n_valid_groups": 154,
+      "skipped": {
+        "treated_too_few": 2,
+        "dmso_control": 2,
+        "deg_missing": 0,
+        "deg_too_few": 0,
+        "ctrl_too_few": 0,
+        "no_pred": 0
+      }
+    }
+  },
+  "test": {
+    "macro_avg": {
+      "r2score": 0.0,
+      "r2score_de": 0.10822556582919923,
+      "pearson": 0.4532345235347748,
+      "pearson_de": 0.6560325117234688,
+      "mse": 6.9657619549677925,
+      "mse_de": 150.64750658672926,
+      "pearson_delta": 0.04047247315382494,
+      "pearson_delta_de": 0.5608007454228944,
+      "sinkhorn_de": 4411.35112157893,
+      "n_valid_groups": 429,
+      "skipped": {
+        "treated_too_few": 14,
+        "dmso_control": 4,
+        "deg_missing": 0,
+        "deg_too_few": 0,
+        "ctrl_too_few": 0,
+        "no_pred": 0
+      }
+    }
+  }
+}
